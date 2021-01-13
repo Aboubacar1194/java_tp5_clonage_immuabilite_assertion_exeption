@@ -186,11 +186,11 @@ public class Personne {
      * la methode ne fait rien.
      * @param fiance
      */
-    public void marier(Personne fiance) {
+    public void marier(Personne fiance) throws ExceptionPersonneDejaMariee {
         if (conjoint == null && fiance.conjoint == null) {
             changerStatut(fiance);
             fiance.changerStatut(this);
-        }
+        }else throw new ExceptionPersonneDejaMariee("Cette personne est deja mariee");
     }
 
     /**

@@ -2,7 +2,7 @@ package clonageDeList;
 
 import java.util.ArrayList;
 
-public class ListeDeStringBuilder {
+public class ListeDeStringBuilder implements Cloneable {
         ArrayList contenu;
 
         public ListeDeStringBuilder() {
@@ -44,9 +44,17 @@ public class ListeDeStringBuilder {
 
         @Override
         public ListeDeStringBuilder clone() {
-            ListeDeStringBuilder clone = new ListeDeStringBuilder();
-            clone.contenu = contenu;
-            return clone;
+            ListeDeStringBuilder listeDeStringBuilder = null;
+            try {
+                 listeDeStringBuilder = (ListeDeStringBuilder) super.clone();
+                 listeDeStringBuilder.contenu = new ArrayList();
+                for (Object s: contenu  ) {
+                    listeDeStringBuilder.contenu.add(new StringBuilder((StringBuilder)s));
+                }
+            } catch (CloneNotSupportedException e) {
+                e.printStackTrace();
+            }
+            return listeDeStringBuilder;
         }
     }
 
